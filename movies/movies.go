@@ -6,7 +6,7 @@ import(
 	"github.com/jinzhu/gorm"
 )
 
-// Creating our Movie struct
+// Movie struct
 type Movie struct {
 	gorm.Model
 	Title  string  `json:"title"`
@@ -15,7 +15,7 @@ type Movie struct {
 	Rating	int		`json:"rating"`
 }
 
-// Here we create out movie functions for our API
+// RentMovies Here we create out movie functions for our API
 func RentMovies(c *fiber.Ctx) error {
 	db := database.DBConn // adding our database connection
 	var movies []Movie
@@ -35,7 +35,10 @@ func NewMovie(c *fiber.Ctx) error {
 	db := database.DBConn
 	movies := new(Movie)
 	if err := c.BodyParser(movies); err != nil {
-		c.Status(503).SendString("Unable to find the movie")
+		err := c.Status(503).SendString("Unable to find the movie")
+		if err != nil {
+			return err
+		}
 	}
 	db.Create(&movies) // Inserting a movie into our movie database
 	return c.JSON(movies)

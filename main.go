@@ -13,7 +13,12 @@ func main() {
 
 	app := fiber.New() // opening an instance of Fiber
 	initDatabase()
-	defer database.DBConn.Close() // Defer untill the main function has finished
+	defer func(DBConn *gorm.DB) {
+		err := DBConn.Close()
+		if err != nil {
+
+		}
+	}(database.DBConn) // Defer until the main function has finished
 
 	setupRoutes(app)
 

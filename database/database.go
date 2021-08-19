@@ -5,7 +5,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-// Defining our global variable and pointer to our connection
+// DBConn Defining our global variable and pointer to our connection
 var (
 	DBConn *gorm.DB
 )
