@@ -1,18 +1,19 @@
 package movies
 
-import(
+import (
 	"github.com/Cbonnin88/fiber-api/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 // Movie struct
 type Movie struct {
 	gorm.Model
-	Title  string  `json:"title"`
-	Year   int		`json:"year"`
-	Director  string  `json:"director"`
-	Rating	int		`json:"rating"`
+	Title     string     `json:"title"`
+	Year      int		 `json:"year"`
+	Director  string     `json:"director"`
+	Rating	  int		 `json:"rating"`
 }
 
 // RentMovies Here we create out movie functions for our API

@@ -6,6 +6,7 @@ import (
 	"github.com/Cbonnin88/fiber-api/movies"
 	"github.com/gofiber/fiber/v2"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
 )
 
@@ -36,7 +37,8 @@ func setupRoutes(app *fiber.App) {
 // here we are initializing our database connection
 func initDatabase() {
 	var err error
-	database.DBConn, err = gorm.Open("sqlite3","movies.db")
+	// NOT my actual password
+	database.DBConn, err = gorm.Open("mysql","root:password@(127.0.0.1:3306)/movies_db?charset=utf8mb4&parseTime=True&loc=Local")
 	if err != nil {
 		panic("Failed to connect to database")
 	}
